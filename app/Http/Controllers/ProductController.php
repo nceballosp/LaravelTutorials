@@ -50,15 +50,9 @@ class ProductController extends Controller
 
         Product::create($request->only(["name","price"]));
 
-        return back();
+        return redirect()->route("product.create")->with("success", 'Product created successfully');;
     }
 
-    public function validate() : View
-    {
-        $viewData = [];
-        $viewData["title"] = "Validation";
-        $viewData["subtitle"] =  "Product created successfully";
-        return view("product.validation")->with("viewData", $viewData);
-    }
+    
 
 }
