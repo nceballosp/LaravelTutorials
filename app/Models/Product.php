@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class Product extends Model
 {
@@ -19,6 +20,14 @@ class Product extends Model
      * $this->attributes['price'] - int - contains the product price
      * $this->comments - Comment[] - contains the associated comments
     */
+
+    public static function validate(Request $request): void
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required | gt:0',
+        ]);
+    }
 
     protected $fillable = ['name','price'];
 
